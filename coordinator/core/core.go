@@ -320,6 +320,11 @@ func (c *Core) getStatus(ctx context.Context) (int, string, error) {
 }
 
 func (c *Core) generateSecrets(ctx context.Context, secrets map[string]Secret) (map[string]Secret, error) {
+	// If there aren't any secrets defined, just return immediately
+	if len(secrets) == 0 {
+		return nil, nil
+	}
+
 	// Create a new map so we do not overwrite the entries in the manifest
 	newSecrets := make(map[string]Secret)
 
